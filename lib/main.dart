@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/common/page_tag.dart';
+import 'package:flutter_demo/integration/call_native.dart';
+import 'package:flutter_demo/ui/home.dart';
+import 'package:flutter_demo/ui/platform_integration/platform_integration.dart';
+import 'package:flutter_demo/ui/route_error.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initApp();
   runApp(MyApp());
+}
+
+initApp() async {
+  CallNative.initChannel();
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +33,30 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      onGenerateRoute: (RouteSettings settings) {
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (ctx) {
+              String name = settings.name;
+              dynamic p = settings.arguments;
+              Widget widget;
+              switch (name) {
+                case PageTag.HomePage:
+                  widget = HomePage();
+                  break;
+                case PageTag.PlatformIntegrationPage:
+                  widget = PlatformIntegrationPage();
+                  break;
+                default:
+                  widget = RouteErrorPage();
+                  break;
+              }
+              return widget;
+            },
+
+        );
+      },
+      initialRoute: PageTag.HomePage,
     );
   }
 }
