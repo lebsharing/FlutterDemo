@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/page_tag.dart';
 import 'package:flutter_demo/integration/call_native.dart';
 import 'package:flutter_demo/ui/home.dart';
+import 'package:flutter_demo/ui/navigation/bottom_navigaton.dart';
 import 'package:flutter_demo/ui/platform_integration/platform_integration.dart';
 import 'package:flutter_demo/ui/route_error.dart';
 
@@ -47,9 +48,13 @@ class MyApp extends StatelessWidget {
                 case PageTag.PlatformIntegrationPage:
                   widget = PlatformIntegrationPage();
                   break;
+                case PageTag.NavPage:
+                  widget = NavPage();
+                  break;
                 default:
                   widget = RouteErrorPage();
                   break;
+
               }
               return widget;
             },
@@ -57,6 +62,7 @@ class MyApp extends StatelessWidget {
         );
       },
       initialRoute: PageTag.HomePage,
+      // initialRoute: PageTag.NavPage,
     );
   }
 }
