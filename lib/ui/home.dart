@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_demo/base/base_flutter.dart';
 import 'package:flutter_demo/common/page_tag.dart';
 import 'package:flutter_demo/model/fun_item.dart';
@@ -34,9 +33,12 @@ class HomePageState extends BaseFlutterState<HomePage> {
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
         ),
         itemCount: funs.length,
         padding: EdgeInsets.only(left: 16,right: 16),
+
         itemBuilder: (ctx, index) {
           return GestureDetector(
             onTap: (){
@@ -58,7 +60,7 @@ class HomePageState extends BaseFlutterState<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    funs[index].name,
+                    funs[index].name ?? "",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
@@ -66,7 +68,7 @@ class HomePageState extends BaseFlutterState<HomePage> {
                     ),
                   ),
                   Text(
-                    funs[index].desc,
+                    funs[index].desc ?? "",
                     style: TextStyle(
                       color: Colors.black54,
                       fontSize: 10,
@@ -86,6 +88,10 @@ class HomePageState extends BaseFlutterState<HomePage> {
       name: "平台集成（Platform integration",
       desc: "MethodChannel",
       pageName: PageTag.PlatformIntegrationPage,
+    ));
+    funs.add(FunItem(
+      name: "常见UI型Widget的使用实例",
+      pageName: PageTag.ViewWidgetExPage,
     ));
     setState(() {
 

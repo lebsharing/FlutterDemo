@@ -5,6 +5,7 @@ import 'package:flutter_demo/ui/home.dart';
 import 'package:flutter_demo/ui/navigation/bottom_navigaton.dart';
 import 'package:flutter_demo/ui/platform_integration/platform_integration.dart';
 import 'package:flutter_demo/ui/route_error.dart';
+import 'package:flutter_demo/ui/view_widget/view_widget_ex_gird.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +51,9 @@ class MyApp extends StatelessWidget {
                   break;
                 case PageTag.NavPage:
                   widget = NavPage();
+                  break;
+                case PageTag.ViewWidgetExPage:
+                  widget  = ViewWidgetExGirdPage();
                   break;
                 default:
                   widget = RouteErrorPage();
