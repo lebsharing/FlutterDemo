@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/base/base_flutter.dart';
 import 'package:flutter_demo/common/page_tag.dart';
 import 'package:flutter_demo/ui/route_error.dart';
+import 'package:flutter_demo/ui/view_widget/animation_page.dart';
 import 'package:flutter_demo/ui/view_widget/visibility_ex.dart';
 
 class ViewWidgetExGirdPage extends BaseFlutterPage {
@@ -88,6 +89,7 @@ class _ViewWidgetExGridPageState extends BaseFlutterState {
     );
   }
 
+  ///处理页面跳转
   void jumpPage(BuildContext ctx,ViewExItem item) {
     if(item.pageTag?.isEmpty ?? true) {
       return;
@@ -97,6 +99,9 @@ class _ViewWidgetExGridPageState extends BaseFlutterState {
       case PageTag.VisibilityPage:
         widget = VisibilityPage();
         break;
+      case PageTag.AnimPage:
+        widget = AnimationPage();
+        break;
       default:
         widget = RouteErrorPage();
         break;
@@ -104,15 +109,17 @@ class _ViewWidgetExGridPageState extends BaseFlutterState {
     print("${item.pageTag}");
     if(widget != null) {
       Navigator.push(ctx, MaterialPageRoute(builder: (bctx){
-        print("${widget == null}");
+        // print("${widget == null}");
         return widget;
       }));
     }
   }
 
+  ///生成数据源
   Future<void> generateData() async {
     data.add(ViewExItem(name: "Offstage",desc: ""));
     data.add(ViewExItem(name: "Visibility", desc: "",pageTag: PageTag.VisibilityPage));
+    data.add(ViewExItem(name: "Animation",desc: "",pageTag: PageTag.AnimPage));
     setState(() {});
   }
 }
